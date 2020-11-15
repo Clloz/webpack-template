@@ -58,21 +58,22 @@
 - CSS
 	- `style-loader`：将样式放入一个 `style` 标签插入到 `head` 中，可以设置样式表内联
 	- `css-loader`：处理样式表的依赖关系，处理完后交给 `style-loader`
-	- `postcss-loader`：一个插件载台，可以配合插件实现很多功能，比如 `autoprefixer`
-	- `less-loader`：解析 `less`
-	- `sass-loader` 解析 `sass`
-	- `stylus-loader`：解析 `stylus`
+	- `postcss-loader`：一个插件载台，可以配合插件实现很多功能，比如 `autoprefixer`，需要安装 `postcss`
+	- `less-loader`：解析 `less`，需要安装 `less`
+	- `sass-loader` 解析 `sass`，需要安装 `sass`
+	- `stylus-loader`：解析 `stylus`，需要安装 `stylus`。`stylus` 的支持不是很好，你可以参考 [使用stylelint检测vue中的stylus代码](https://juejin.im/post/6854573221916868616 "使用stylelint检测vue中的stylus代码")
 	- `px2rem-loader`：转换 `CSS` 中的单位到 `rem`，以实现不同设备的自适应
 - image & file
-	- `file-loader`
-	- `url-loader`
+	- file-loader
+	- url-loader
 - `JavaScript`
 	- `thread-loader`：多线程打包
 	- babel-loader：解析转换 `ES6+` 代码
 	- `eslint-loader`：代码检查
 	- `cache-loader`：缓存跟在后面的 `loader` 的处理结果，`webpack 5` 不再需要，因为内置了缓存配置，添加 `cache` 字段即可，详细配置参考官方文档
 - `HTML`
-	- `html-loader`：用来实现 `HTML` 和 `JavaScript` 内联
+	- `html-loader`：用来实现 `HTML` 和 `JavaScript` 内联，可以将文件作为字符串输出
+	- `raw-loader`：将文件作为字符串输出
 - Vue
 	-` vue-loader`
 
@@ -130,8 +131,12 @@
 - @babel/polyfill：包含如下两项（现在 `@babel/polyfill` 已经被弃用，官方推荐 `core-js`）
 	- `@babel/plugin-transform-regenerator`：支持 `generator` 和 `async`
 	- `@babel/runtime-corejs3`
+- `@babel/plugin-syntax-jsx`
 - React
 	- `@babel/preset-react`
+- Vue
+	- `@vue/babel-plugin-transform-vue-jsx`
+	- `@vue/babel-helper-vue-jsx-merge-props`
 
 #### 代码检查和格式化
 
@@ -146,17 +151,21 @@
 - stylelint-config-standard
 - babel-eslint
 - Vue
-	- eslint-plugin-vue
-	- @vue/cli-plugin-eslint
+	- `eslint-plugin-vue`
+	- `@vue/cli-plugin-eslint`
 - React
-	- eslint-plugin-react
+	- eslint-plugin-react：在 `extends` 中添加 `eslint:recommended`
 
 #### Vue
 
+- `vue-cli`
 - `vue`
 - `vue-router`
+- `vue-template-compiler`
 
 #### React
+
+- `create-react-app`
 - `react`
 - `react-dom`
 - `react-router-dom`
