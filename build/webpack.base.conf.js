@@ -1,7 +1,7 @@
 /*
  * @Author: Clloz
  * @Date: 2020-11-12 20:00:21
- * @LastEditTime: 2020-11-15 13:29:04
+ * @LastEditTime: 2020-11-15 17:19:33
  * @LastEditors: Clloz
  * @Description: 各环境通用配置
  * @FilePath: /webpack-template/build/webpack.base.conf.js
@@ -108,11 +108,21 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader'],
+                use: [
+                    MiniCSSExtractPlugin.loader,
+                    'css-loader',
+                    { loader: 'postcss-loader', options: { sourceMap: true } },
+                    { loader: 'sass-loader', options: { sourceMap: true } },
+                ],
             },
             {
                 test: /\.less$/,
-                use: [MiniCSSExtractPlugin.loader, 'css-loader', 'less-loader', 'postcss-loader'],
+                use: [
+                    MiniCSSExtractPlugin.loader,
+                    'css-loader',
+                    { loader: 'postcss-loader', options: { sourceMap: true } },
+                    { loader: 'less-loader', options: { sourceMap: true } },
+                ],
             },
             {
                 test: /.(woff|woff2|eot|otf|ttf)$/,
