@@ -1,7 +1,7 @@
 /*
  * @Author: Clloz
  * @Date: 2020-11-12 20:00:21
- * @LastEditTime: 2020-11-15 17:19:33
+ * @LastEditTime: 2020-11-15 19:18:05
  * @LastEditors: Clloz
  * @Description: 各环境通用配置
  * @FilePath: /webpack-template/build/webpack.base.conf.js
@@ -10,7 +10,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const glob = require('glob');
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin'); // 分离 CSS 生成文件而不是用 style 标签插入
 const PurgeCSSPlugin = require('purgecss-webpack-plugin'); // 清除没有用到的 CSS
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // 按模版自动生成入口 HTML，功能非常丰富，比如多入口，HTML 压缩等，参考官方文档，webpack 5 安装 html-webpack-plugin@next
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin'); // 优化打包命令行输出
@@ -92,39 +91,6 @@ module.exports = {
                 },
             },
             {
-                test: /\.css$/,
-                use: [
-                    MiniCSSExtractPlugin.loader,
-                    'css-loader',
-                    'postcss-loader',
-                    {
-                        loader: 'px2rem-loader',
-                        options: {
-                            remUnit: 75,
-                            remPrecision: 8,
-                        },
-                    },
-                ],
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    MiniCSSExtractPlugin.loader,
-                    'css-loader',
-                    { loader: 'postcss-loader', options: { sourceMap: true } },
-                    { loader: 'sass-loader', options: { sourceMap: true } },
-                ],
-            },
-            {
-                test: /\.less$/,
-                use: [
-                    MiniCSSExtractPlugin.loader,
-                    'css-loader',
-                    { loader: 'postcss-loader', options: { sourceMap: true } },
-                    { loader: 'less-loader', options: { sourceMap: true } },
-                ],
-            },
-            {
                 test: /.(woff|woff2|eot|otf|ttf)$/,
                 loader: 'file-loader',
                 options: {
@@ -151,11 +117,6 @@ module.exports = {
             cache: true,
             emitErrors: true,
             failOnError: false,
-        }),
-        // 分离提取 CSS 文件
-        new MiniCSSExtractPlugin({
-            filename: '[name]_[contenthash:8].css',
-            chunkFilename: '[name].[contenthash].css',
         }),
         // 优化打包命令行输出
         new FriendlyErrorsWebpackPlugin(),

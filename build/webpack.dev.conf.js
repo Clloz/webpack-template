@@ -1,7 +1,7 @@
 /*
  * @Author: Clloz
  * @Date: 2020-11-12 20:00:21
- * @LastEditTime: 2020-11-15 12:01:35
+ * @LastEditTime: 2020-11-15 19:15:11
  * @LastEditors: Clloz
  * @Description: 开发环境的打包配置，用 webpack-merge 和基础配置进行合并
  * @FilePath: /webpack-template/build/webpack.dev.conf.js
@@ -17,6 +17,43 @@ const devConfig = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'postcss-loader',
+                    {
+                        loader: 'px2rem-loader',
+                        options: {
+                            remUnit: 75,
+                            remPrecision: 8,
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    { loader: 'postcss-loader', options: { sourceMap: true } },
+                    { loader: 'sass-loader', options: { sourceMap: true } },
+                ],
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    { loader: 'postcss-loader', options: { sourceMap: true } },
+                    { loader: 'less-loader', options: { sourceMap: true } },
+                ],
+            },
+        ],
     },
     // 开启模块热更新
     plugins: [new webpack.HotModuleReplacementPlugin()],

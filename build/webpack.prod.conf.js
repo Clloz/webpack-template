@@ -1,7 +1,7 @@
 /*
  * @Author: Clloz
  * @Date: 2020-11-12 20:00:21
- * @LastEditTime: 2020-11-15 13:48:03
+ * @LastEditTime: 2020-11-15 19:16:34
  * @LastEditors: Clloz
  * @Description: 开发环境的打包配置，用 webpack-merge 和基础配置进行合并
  * @FilePath: /webpack-template/build/webpack.prod.conf.js
@@ -11,6 +11,7 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin'); // 代码压缩工具，支持并行压缩
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 清理打包目录
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin'); // 分离 CSS 生成文件而不是用 style 标签插入
 
 // webpack 5 之前的版本进行 CSS 压缩的工具
 // const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -41,11 +42,53 @@ const prodConfig = {
         publicPath: './', // 这里我设置了 /dist/ 就需要在项目根目录开启 http-server，如果想直接打开 dist 中的 html 访问就设置为 ./ 即可
         chunkFilename: '[name][chunkhash:8].js', // 设置非入口 chunk 的 name
     },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCSSExtractPlugin.loader,
+                    'css-loader',
+                    'postcss-loader',
+                    {
+                        loader: 'px2rem-loader',
+                        options: {
+                            remUnit: 75,
+                            remPrecision: 8,
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCSSExtractPlugin.loader,
+                    'css-loader',
+                    { loader: 'postcss-loader', options: { sourceMap: true } },
+                    { loader: 'sass-loader', options: { sourceMap: true } },
+                ],
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    MiniCSSExtractPlugin.loader,
+                    'css-loader',
+                    { loader: 'postcss-loader', options: { sourceMap: true } },
+                    { loader: 'less-loader', options: { sourceMap: true } },
+                ],
+            },
+        ],
+    },
     // webpack 5 新特性，开启缓存，缓存默认只在 development 模式下开启，有 memery 和 filesystem 两种，具体参考文档
     cache: {
         type: 'memory',
     },
     plugins: [
+        // 分离提取 CSS 文件
+        new MiniCSSExtractPlugin({
+            filename: '[name]_[contenthash:8].css',
+            chunkFilename: '[name].[contenthash].css',
+        }),
         new CleanWebpackPlugin(), // 清理打包目录
         // webpack 5 之前使用的 css 压缩工具，webpack 5 之后建议用 CssMinimizerPlugin 代替
         // new OptimizeCSSAssetsPlugin({
