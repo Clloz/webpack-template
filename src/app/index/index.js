@@ -1,7 +1,7 @@
 /*
  * @Author: Clloz
  * @Date: 2020-11-12 21:06:37
- * @LastEditTime: 2020-11-15 13:22:50
+ * @LastEditTime: 2020-11-17 16:02:13
  * @LastEditors: Clloz
  * @Description:
  * @FilePath: /webpack-template/src/app/index/index.js
@@ -17,6 +17,7 @@ import libFlexible from 'raw-loader!babel-loader!../../../node_modules/lib-flexi
 import common from '../../assets/js/common';
 
 import img from '../../assets/images/1.jpg';
+import icon from '../../assets/images/todo.png';
 
 const _ = require('lodash');
 
@@ -44,3 +45,7 @@ console.log(g.next());
 const imgEl = document.createElement('img');
 imgEl.src = img;
 document.body.appendChild(imgEl);
+
+const iconEl = document.createElement('img');
+iconEl.src = icon;
+document.body.appendChild(iconEl);

@@ -25,6 +25,7 @@
 - 多入口多环境配置
 - 分离样式文件 `mini-css-extract-plugin`
 - 清除未使用的 `CSS`：`purgecss-webpack-plugin`
+- 对小图片和字体使用 `base64` 打包进 `HTML`
 - 使用 `html-webpack-plugin`：生成入口文件，并进行压缩
 - 使用 `friendly-errors-webpack-plugin` 优化命令行输出
 - 使用 `stylelint-webpack-plugin` 进行 `CSS` 代码检查
@@ -81,9 +82,11 @@
 
 - CSS
 	- `mini-css-extract-plugin`：分离样式文件
-	- `autoprefixer`：自动添加厂商前缀
+	- `autoprefixer`：自动添加厂商前缀, 作为 `postcss` 的插件
+    - `postcss-preset-env`：使用比较新的的 `CSS` 特性，作为 `postcss` 的插件
+	- `postcss-import`：支持各种 `@import` 作为文本直接导入（不知道是不是 `webpack 5` 内置了对 `@import` 的处理，不开启这个插件一样可以将 `@import` 引入的 `CSS` 直接插入当前 `CSS` 中
+	- `postcss-url`：可以对 `url()` 函数中的路径进行各种配置（没研究出来具体的用法，官方文档没有给出在 `webpack` 和 `postcss.config.js` 中的配置）
 	- `stylelint`：样式代码检查工具，需要安装 `stylelint-config-standard`
-	- `CSSNext`：使用最新 `CSS` 特性
 	- `cssnano`：`CSS` 压缩器
 	- `optimize-css-assets-webpack-plugin`：调用 `cssnano` 进行代码压缩，需要分离样式文件，webpack 5 建议换成下面的 `css-minimizer-webpack-plugin`
 	- `css-minimizer-webpack-plugin`：`webpack 5` 建议使用这个插件进行 `CSS` 的压缩

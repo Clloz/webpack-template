@@ -1,7 +1,7 @@
 /*
  * @Author: Clloz
  * @Date: 2020-11-12 20:47:19
- * @LastEditTime: 2020-11-14 19:20:18
+ * @LastEditTime: 2020-11-17 16:17:16
  * @LastEditors: Clloz
  * @Description: stylelint 的配置文件，详细配置规则参考官方文档
  * @FilePath: /webpack-template/stylelint.config.js
@@ -19,5 +19,11 @@ module.exports = {
             },
         ],
         'declaration-no-important': true, // 强制不可以写 important 规则
+        'font-family-no-missing-generic-family-keyword': [
+            true,
+            {
+                ignoreFontFamilies: ['sail'],
+            },
+        ],
     },
 };

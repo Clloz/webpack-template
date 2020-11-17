@@ -1,5 +1,26 @@
-body {
+@import "bg.css" (min-width: 25em); /* 使用postcss-import引入 */
+
+@font-face {
+    font-family: 'sail';
+    src: url('../fonts/Sail-Regular.otf');
+}
+
+/* 测试 postcss 的 preset-env */
+:root {
+    --mainColor: #12345678; /* 16 进制，每两位表示 rgba 中的一位 */
+}
+
+/* 会翻译成如下代码 */
+
+/* body {
+    color: rgba(18, 52, 86, 0.47059);
+    color: var(--mainColor);
+} */
+
+body * {
     font-size: 30px;
+    font-family: 'sail';
+    background-color: var(--mainColor);
 }
 
 .unuserd {

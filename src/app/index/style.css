@@ -1,3 +1,5 @@
-p {
-    color: rgb(31, 0, 204);
+a {
+    text-decoration: none;
+    color: #09c;
+    border: 3px solid;
 }

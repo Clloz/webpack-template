@@ -1,7 +1,7 @@
 /*
  * @Author: Clloz
  * @Date: 2020-11-12 20:00:21
- * @LastEditTime: 2020-11-15 19:18:05
+ * @LastEditTime: 2020-11-17 18:12:56
  * @LastEditors: Clloz
  * @Description: 各环境通用配置
  * @FilePath: /webpack-template/build/webpack.base.conf.js
@@ -36,7 +36,7 @@ const setMPA = () => {
                 template: path.join(__dirname, `../src/app/${pageName}/index.html`),
                 filename: `${pageName}.html`,
                 chunks: [pageName], // 这里似乎必须写成数组，不然所有chunk都会打包进每一个html
-                // excludeChunks: ['index', 'page2'],
+                excludeChunks: ['common'], // 这里有个没有解决的问题就是 splitChunk 分离出来的包会加到所有入口中去，即使该入口中没有用到这个模块
                 inject: true,
                 minify: {
                     html5: true,
@@ -85,17 +85,17 @@ module.exports = {
                 test: /\.(png|jpg|jpeg|gif|svg)$/,
                 loader: 'url-loader',
                 options: {
-                    limit: 3000,
+                    limit: 4000, // 图片小于 4000 Bytes 会使用 base64 打包插入 HTML
                     name: 'images/[name][hash:8].[ext]',
                     // publicPath: '/images/', // 很多 loader 可以单独设置 publicPath
                 },
             },
             {
-                test: /.(woff|woff2|eot|otf|ttf)$/,
-                loader: 'file-loader',
+                test: /\.(woff|woff2|eot|otf|ttf)$/,
+                loader: 'url-loader',
                 options: {
-                    limit: 10000,
-                    name: '[name].[hash:8].[ext]',
+                    limit: 3000, // 字体小于 4000 Bytes 会使用 base64 打包插入 HTML
+                    name: 'fonts/[name].[hash:8].[ext]',
                 },
             },
         ],
