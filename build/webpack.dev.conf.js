@@ -1,7 +1,7 @@
 /*
  * @Author: Clloz
  * @Date: 2020-11-12 20:00:21
- * @LastEditTime: 2020-11-15 19:15:11
+ * @LastEditTime: 2020-11-19 10:34:37
  * @LastEditors: Clloz
  * @Description: 开发环境的打包配置，用 webpack-merge 和基础配置进行合并
  * @FilePath: /webpack-template/build/webpack.dev.conf.js
@@ -51,6 +51,13 @@ const devConfig = {
                     'css-loader',
                     { loader: 'postcss-loader', options: { sourceMap: true } },
                     { loader: 'less-loader', options: { sourceMap: true } },
+                    {
+                        loader: 'style-resources-loader',
+                        options: {
+                            patterns: [path.resolve(__dirname, 'src/assets/style/global.less')],
+                            injector: 'append',
+                        },
+                    },
                 ],
             },
         ],

@@ -64,6 +64,8 @@
 	- `sass-loader` 解析 `sass`，需要安装 `sass`
 	- `stylus-loader`：解析 `stylus`，需要安装 `stylus`。`stylus` 的支持不是很好，你可以参考 [使用stylelint检测vue中的stylus代码](https://juejin.im/post/6854573221916868616 "使用stylelint检测vue中的stylus代码")
 	- `px2rem-loader`：转换 `CSS` 中的单位到 `rem`，以实现不同设备的自适应
+	- `style-resouces-loader`：我们可以将全局的样式放入一个单独的文件中，该 `loader` 能够在打包的的时候帮我们注入其他的样式文件，而不用我们在每一个样式文件中 `@import`。该 `loader` 目前在 `webpack 5` 下无法工作
+	- `vue-cli-style-resources-loader`：同上
 - image & file
 	- file-loader
 	- url-loader

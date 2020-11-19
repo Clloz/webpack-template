@@ -1,7 +1,7 @@
 /*
  * @Author: Clloz
  * @Date: 2020-11-12 20:00:21
- * @LastEditTime: 2020-11-15 19:16:34
+ * @LastEditTime: 2020-11-19 12:38:49
  * @LastEditors: Clloz
  * @Description: 开发环境的打包配置，用 webpack-merge 和基础配置进行合并
  * @FilePath: /webpack-template/build/webpack.prod.conf.js
@@ -17,7 +17,7 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin'); // 分离 CSS �
 // const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 // const cssnano = require('cssnano');
 
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin'); // webpack 5 推荐使用的 CSS 研所工具，支持并行
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin'); // webpack 5 推荐使用的 CSS 压缩工具，支持并行
 // const HardSourceWebpackPlugin = require('hard-source-webpack-plugin'); // 模块缓存 webpack 5 不再需要，因为内置了缓存配置，添加 `cache` 字段即可，详细配置参考官方文档
 
 // 一些效率工具，自行选择
@@ -66,6 +66,13 @@ const prodConfig = {
                     'css-loader',
                     { loader: 'postcss-loader', options: { sourceMap: true } },
                     { loader: 'sass-loader', options: { sourceMap: true } },
+                    // style-resources-loader 目前在 webpack 5 无法工作
+                    {
+                        loader: 'style-resources-loader',
+                        options: {
+                            patterns: [path.resolve(__dirname, './src/assets/style/globa.scss')],
+                        },
+                    },
                 ],
             },
             {
@@ -75,6 +82,13 @@ const prodConfig = {
                     'css-loader',
                     { loader: 'postcss-loader', options: { sourceMap: true } },
                     { loader: 'less-loader', options: { sourceMap: true } },
+                    // style-resources-loader 目前在 webpack 5 无法工作
+                    {
+                        loader: 'style-resources-loader',
+                        options: {
+                            patterns: '../src/assets/style/globa.less',
+                        },
+                    },
                 ],
             },
         ],
