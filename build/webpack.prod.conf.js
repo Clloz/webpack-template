@@ -1,7 +1,7 @@
 /*
  * @Author: Clloz
  * @Date: 2020-11-12 20:00:21
- * @LastEditTime: 2020-11-19 12:38:49
+ * @LastEditTime: 2020-11-20 19:01:24
  * @LastEditors: Clloz
  * @Description: 开发环境的打包配置，用 webpack-merge 和基础配置进行合并
  * @FilePath: /webpack-template/build/webpack.prod.conf.js
@@ -27,6 +27,8 @@ const DashboardPlugin = require('webpack-dashboard/plugin'); // 图形化命令�
 // const SpeedMeasurePlugin = require('speed-measure-webpack-plugin'); // 分析构建过程中在各个 `loader` 和 `plugin` 上花费的时间
 
 const baseConfig = require('./webpack.base.conf');
+
+console.log(path.resolve(__dirname, '../src/assets/style/globa.scss'));
 
 const prodConfig = {
     // mode: 'none', //test tree shaking
@@ -66,11 +68,10 @@ const prodConfig = {
                     'css-loader',
                     { loader: 'postcss-loader', options: { sourceMap: true } },
                     { loader: 'sass-loader', options: { sourceMap: true } },
-                    // style-resources-loader 目前在 webpack 5 无法工作
                     {
                         loader: 'style-resources-loader',
                         options: {
-                            patterns: [path.resolve(__dirname, './src/assets/style/globa.scss')],
+                            patterns: [path.resolve(__dirname, '../src/assets/style/global.scss')],
                         },
                     },
                 ],
@@ -82,11 +83,10 @@ const prodConfig = {
                     'css-loader',
                     { loader: 'postcss-loader', options: { sourceMap: true } },
                     { loader: 'less-loader', options: { sourceMap: true } },
-                    // style-resources-loader 目前在 webpack 5 无法工作
                     {
                         loader: 'style-resources-loader',
                         options: {
-                            patterns: '../src/assets/style/globa.less',
+                            patterns: [path.resolve(__dirname, '../src/assets/style/global.less')],
                         },
                     },
                 ],

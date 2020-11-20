@@ -64,7 +64,7 @@
 	- `sass-loader` 解析 `sass`，需要安装 `sass`
 	- `stylus-loader`：解析 `stylus`，需要安装 `stylus`。`stylus` 的支持不是很好，你可以参考 [使用stylelint检测vue中的stylus代码](https://juejin.im/post/6854573221916868616 "使用stylelint检测vue中的stylus代码")
 	- `px2rem-loader`：转换 `CSS` 中的单位到 `rem`，以实现不同设备的自适应
-	- `style-resouces-loader`：我们可以将全局的样式放入一个单独的文件中，该 `loader` 能够在打包的的时候帮我们注入其他的样式文件，而不用我们在每一个样式文件中 `@import`。该 `loader` 目前在 `webpack 5` 下无法工作
+	- `style-resouces-loader`：我们可以将全局的样式放入一个单独的文件中，该 `loader` 能够在打包的的时候帮我们注入其他的样式文件，而不用我们在每一个样式文件中 `@import`。
 	- `vue-cli-style-resources-loader`：同上
 - image & file
 	- file-loader
@@ -83,7 +83,7 @@
 #### webpack plugin
 
 - CSS
-	- `mini-css-extract-plugin`：分离样式文件
+	- `mini-css-extract-plugin`：分离样式文件,不要在开发环境下使用，会导致样式无法热更新
 	- `autoprefixer`：自动添加厂商前缀, 作为 `postcss` 的插件
     - `postcss-preset-env`：使用比较新的的 `CSS` 特性，作为 `postcss` 的插件
 	- `postcss-import`：支持各种 `@import` 作为文本直接导入（不知道是不是 `webpack 5` 内置了对 `@import` 的处理，不开启这个插件一样可以将 `@import` 引入的 `CSS` 直接插入当前 `CSS` 中
