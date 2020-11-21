@@ -125,6 +125,7 @@
 
 - `corss-env`：设置环境变量
 - `webpack-merge`：多环境配置文件合并工具
+- `depcheck`: 分析我们实际使用的依赖，清理没有用到的包
 
 #### babel
 
